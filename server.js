@@ -56,6 +56,11 @@ app.get('/api/servers', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Backend running on http://localhost:3000');
+app.get('/', (req, res) => {
+  res.redirect('/api/servers');
+});
+
+aconst PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
