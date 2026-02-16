@@ -3,6 +3,17 @@ const cors = require('cors');
 const query = require('source-server-query');
 
 const app = express();
+
+const path = require('path');
+
+// Serve static files from the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Catch-all route: send index.html for any non-API path
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 app.use(cors());
 app.use(express.json());
 
