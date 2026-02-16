@@ -1,0 +1,6 @@
+# requirements.txt
+# For the Node.js backend server (Express + A2S querying)
+
+express@4.19.2          # Web server framework
+cors@2.8.5              # Enables CORS so your frontend can fetch from localhost:3000
+source-server-query@2.1.0  # Library for A2S (Source engine server queries) – most reliable for TF2/CS:GO/etc.
