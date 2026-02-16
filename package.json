@@ -1,18 +1,19 @@
 {
-  "name": "pipeline.tf",
+  "name": "tf2-server-browser-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "description": "Backend for dynamic TF2 server list with live queries",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
     "source-server-query": "^3.0.3"
-  }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "antidruid",
+  "license": "MIT"
 }
