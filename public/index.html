@@ -3,14 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dynamic TF2 Server Browser</title>
+  <title>Pipeline.tf - Quickplay-stle TF2 Servers</title>
   <link rel="stylesheet" href="styles.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
 </head>
 <body>
 
+  <nav class="top-bar">
+    <div class="top-bar-content">
+      
+      <ul class="nav-links">
+        <li><a href="javascript:void(0)" data-modal="coc">Code of Conduct</a></li>
+		<li><a href="maps" target="_blank">Maps Download</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div id="modal-coc" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Code of Conduct</h1>
+
+		<p>This project respects everyone's freedom of expression as well as freedom of association.</p>
+		<p>See something you don't like? TF2 has built-in tools to avoid spicy sprays/decals or mute players you don't want to talk to.</p>
+		<p>- <a href="https://wiki.teamfortress.com/wiki/Communication#Muting_players" target="_blank">Muting Players</a></p>
+		<p>- <a href="https://wiki.teamfortress.com/wiki/Multiplayer_options#Advanced_multiplayer_options:~:text=tf_use_min_viewmodels%20%220%22-,Disable%20sprays,-Yes" target="_blank">Disable Sprays/Hide custom decals</a></p>
+  </div>
+</div>
+  
   <div class="container">
-    <h1>PIPELINE.TF</h1>
+    <img src="pipelinetf-logo.png" alt="..." class="logo">
 
     <div id="server-list">
       <input class="search" placeholder="Search name, map, players, location, ping..." />
@@ -85,5 +107,75 @@
     window.addEventListener('load', loadServers);
     setInterval(loadServers, 30000);
   </script>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <p>
+        &copy; LOLOLOL.<br>
+        Not affiliated with Valve Corporation or Team Fortress 2.
+      </p>
+      <div class="footer-links">
+        <a href="https://www.youtube.com/@plr_pipeline" target="_blank" rel="noopener noreferrer">Youtube</a>
+        <span class="separator">•</span>
+        <a href="https://github.com/AntiDruid/pipeline.tf" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="separator">•</span>
+        <a href="mailto:plrpipeline2009@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+  
+<script>
+// Get all trigger links (those with data-modal)
+const modalTriggers = document.querySelectorAll('[data-modal]');
+
+// Get all close buttons (one per modal)
+const closeButtons = document.querySelectorAll('.modal .close');
+
+// Get all modals
+const modals = document.querySelectorAll('.modal');
+
+// Open modal function
+function openModal(modalId) {
+  const modal = document.getElementById(`modal-${modalId}`);
+  if (modal) {
+    modal.style.display = "block";
+  }
+}
+
+// Close modal function
+function closeModal() {
+  modals.forEach(modal => {
+    modal.style.display = "none";
+  });
+}
+
+// Add click listeners to all triggers
+modalTriggers.forEach(trigger => {
+  trigger.addEventListener('click', function(e) {
+    e.preventDefault();                // Prevent any default behavior
+    const modalId = this.getAttribute('data-modal');
+    openModal(modalId);
+  });
+});
+
+// Close when clicking X on any modal
+closeButtons.forEach(btn => {
+  btn.addEventListener('click', closeModal);
+});
+
+// Close when clicking outside any modal content
+window.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal')) {
+    closeModal();
+  }
+});
+
+// Optional: Close with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
+</script>
 </body>
 </html>
