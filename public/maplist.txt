@@ -89,3 +89,4 @@ sd_offload_b3
 tc_hydro
 dom_cliffhanger_b11
 pl_longboy_b12
+rd_asteroid
