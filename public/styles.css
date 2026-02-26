@@ -189,7 +189,21 @@ h1 { text-align: center; }
   font-weight: bold;
 }
 
+.join-btn2 {
+  display: block;
+  margin-top: 1rem;
+  background: #e67e22;
+  color: white;
+  text-align: center;
+  padding: 0.6rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .join-btn:hover { background: #d35400; }
+
+.join-btn2:hover { background: #d35400; }
 
 /* Footer */
 .footer {
@@ -258,3 +272,4 @@ footer {
   margin-top: auto;  /* Pushes footer to bottom */
 
 }
+
