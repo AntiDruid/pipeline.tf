@@ -56,12 +56,11 @@
 	<a href="https://discord.gg/SQB2hWUNQJ" class="join-btn2">Join the Discord for Notifications!</a>
 
 <div id="server-list">
-      <input class="search" placeholder="Search name, map, players, location, ping..." />
+      <input class="search" placeholder="Search name, map, players, location..." />
       <div class="sort-buttons">
         <button class="sort" data-sort="name">Sort by Name</button>
         <button class="sort" data-sort="players">Sort by Players</button>
         <button class="sort" data-sort="map">Sort by Map</button>
-        <button class="sort" data-sort="ping">Sort by Ping</button>
       </div>
       <div class="list grid"></div> 
     </div>
@@ -70,13 +69,12 @@
   <script>
     // List.js setup
     var options = {
-      valueNames: ['name', 'map', 'players', 'location', 'ping'],
+      valueNames: ['name', 'map', 'players', 'location'],
       item: `<div class="card">
                <h3 class="name"></h3>
                <p class="map"></p>
                <p class="players"></p>
                <p class="location"></p>
-               <p class="ping"></p>
                <a href="#" class="join-btn">Join</a>
              </div>`
     };
@@ -94,9 +92,6 @@
     // For players: extract before '/' (e.g., 18 from "18/24")
     serverList.sort('players', { sortFunction: numericSort('players', v => parseInt(v.split('/')[0])) });
 
-    // For ping: extract number before ' ms' (e.g., 50 from "50 ms")
-    serverList.sort('ping', { sortFunction: numericSort('ping', v => parseInt(v.split(' ')[0])) });
-
     async function loadServers() {
       try {
         const response = await fetch('/api/servers');
@@ -110,7 +105,6 @@
             map: s.map,
             players: s.players,
             location: s.location,
-            ping: s.ping
           });
         });
 
@@ -205,6 +199,7 @@ document.addEventListener('keydown', function(event) {
 </body>
 
 </html>
+
 
 
 
