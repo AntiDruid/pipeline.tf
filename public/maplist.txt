@@ -17,8 +17,8 @@ cp_gravelpit
 ctf_haarp
 cp_egypt_final
 cp_fulgur
-cp_mojave_b2
 ctf_vector_v1
+cp_mojave_b2
 
 // CAPTURE THE FLAG
 ctf_well
@@ -39,7 +39,9 @@ cp_powerhouse
 cp_vanguard
 cp_yukon_final
 cp_mossrock
+cp_altitude
 cp_convoy
+
 
 // KING OF THE HILL
 koth_probed
@@ -50,12 +52,13 @@ koth_sharkbay
 koth_viaduct
 koth_badlands
 koth_harvest_final
-koth_cascade_rc1a
+koth_rocktop_rc2
 koth_arctic_b3
+garbage_day
 koth_bagel_rc12
 koth_peaks_b6a
-koth_rocktop_rc2
-koth_lumberyard_rc2
+koth_cascade_rc1a
+
 
 // PAYLOAD
 pl_goldrush
@@ -65,21 +68,21 @@ pl_barnblitz
 pl_cashworks
 pl_snowycoast
 pl_frontier_final
+pl_cactuscanyon_redux_m_rc2
 pl_beerbowl_rc1
 pl_boundary_final1
-pl_cactuscanyon_redux_m_rc2
 
 // PAYLOAD RACE
 plr_pipeline
 plr_nightfall
 plr_bananabay
 plr_hightower
-plr_hierarch_rc2b
 plr_icyflats_rc3
-plr_panic_b2
+plr_yuno_rc1
+plr_hierarch_rc2b
 plr_rush_rc1
 plr_solitude_b1
-plr_yuno_rc1
+plr_panic_b2
 
 // EXTRAS
 pd_watergate
@@ -89,4 +92,3 @@ sd_offload_b3
 tc_hydro
 dom_cliffhanger_b11
 pl_longboy_b12
-rd_asteroid
