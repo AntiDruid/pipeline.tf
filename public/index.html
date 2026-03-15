@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pipeline.tf - Quickplay-style TF2 Servers</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+</head>
+<body>
+
+  <nav class="top-bar">
+    <div class="top-bar-content">
+      
+      <ul class="nav-links">
+        <li><a href="javascript:void(0)" data-modal="ruleset">Ruleset</a></li>
+		<li><a href="maplist.txt">Map Rotation</a></li>
+		<li><a href="https://drive.google.com/drive/folders/1JoiRIPdnoKxCixnLBYMBmPId1PP8Bf7v?usp=sharing">Map Downloads</a></li>
+		<li><a href="javascript:void(0)" data-modal="coc">Code of Conduct</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+<div id="modal-coc" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Code of Conduct</h1>
+
+		<p>This project respects everyone's freedom of expression as well as freedom of association.</p>
+		<p>See something you don't like? TF2 has built-in tools to avoid spicy sprays/decals or mute players you don't want to talk to.</p>
+		<p>- <a href="https://wiki.teamfortress.com/wiki/Communication#Muting_players" target="_blank">Muting Players</a></p>
+		<p>- <a href="https://wiki.teamfortress.com/wiki/Multiplayer_options#Advanced_multiplayer_options:~:text=tf_use_min_viewmodels%20%220%22-,Disable%20sprays,-Yes" target="_blank">Disable Sprays/Hide custom decals</a></p>
+  </div>
+</div>
+
+<div id="modal-ruleset" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+	<h1>Quickplay Ruleset!</h1>
+	<p></p>
+	<p style="text-align: center;">45 Minute Server Timer</p>
+	<p style="text-align: center;">Random Crits Enabled</p>
+	<p style="text-align: center;">Random Bullet Spread Enabled</p>
+	<p style="text-align: center;">All Talk Enabled</p>
+	<p style="text-align: center;">Spectator Mode Available</p>
+	<p style="text-align: center;">Disabled Spawn Glows (Spy Buff)</p>
+	<p></p>
+	<h1>You can call votes on:</h1>
+    <p style="text-align: center;">Scramble Teams</p>
+	<p style="text-align: center;">Change/Extend Map</p>
+  </div>
+</div>
+  
+  <div class="container">
+    <img src="pipelinetf-logo.png" alt="..." class="logo">
+	<h1>Regular Play Sessions on Weekends @7PM (CST & UTC)</h1>
+	<a href="https://discord.gg/SQB2hWUNQJ" class="join-btn2">Join the Discord for Notifications!</a>
+
+<div id="server-list">
+      <input class="search" placeholder="Search name, map, players, location..." />
+      <div class="sort-buttons">
+        <button class="sort" data-sort="name">Sort by Name</button>
+        <button class="sort" data-sort="players">Sort by Players</button>
+        <button class="sort" data-sort="map">Sort by Map</button>
+      </div>
+      <div class="list grid"></div> 
+    </div>
+  </div>
+
+  <script>
+    // List.js setup
+    var options = {
+      valueNames: ['name', 'map', 'players', 'location'],
+      item: `<div class="card">
+               <h3 class="name"></h3>
+               <p class="map"></p>
+               <p class="players"></p>
+               <p class="location"></p>
+               <a href="#" class="join-btn">Join</a>
+             </div>`
+    };
+    var serverList = new List('server-list', options);
+
+    // Custom numeric sorts
+    function numericSort(field, extractor) {
+      return function(a, b) {
+        const aNum = extractor(a.values()[field]) || 9999;
+        const bNum = extractor(b.values()[field]) || 9999;
+        return aNum - bNum;
+      };
+    }
+
+    // For players: extract before '/' (e.g., 18 from "18/24")
+    serverList.sort('players', { sortFunction: numericSort('players', v => parseInt(v.split('/')[0])) });
+
+    async function loadServers() {
+      try {
+        const response = await fetch('/api/servers');
+        if (!response.ok) throw new Error('Failed to fetch servers');
+        const servers = await response.json();
+
+        serverList.clear();
+        servers.forEach(s => {
+          serverList.add({
+            name: s.name,
+            map: s.map,
+            players: s.players,
+            location: s.location,
+          });
+        });
+
+        // Update join links
+        document.querySelectorAll('.join-btn').forEach((btn, i) => {
+          btn.href = `steam://connect/${servers[i].ip}`;
+        });
+      } catch (err) {
+        console.error('Error:', err);
+        // Fallback: Add a dummy offline card or message
+      }
+    }
+
+    // Load once + auto-refresh every 30s for live updates
+    window.addEventListener('load', loadServers);
+    setInterval(loadServers, 30000);
+  </script>
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <p>
+        &copy; LOLOLOL.<br>
+        Not affiliated with Valve Corporation or Team Fortress 2.
+      </p>
+      <div class="footer-links">
+        <a href="https://www.youtube.com/@plr_pipeline" target="_blank" rel="noopener noreferrer">Youtube</a>
+        <span class="separator">•</span>
+		<a href="https://discord.gg/SQB2hWUNQJ">Discord</a>
+		<span class="separator">•</span>
+		<a href="https://steamcommunity.com/groups/plr_pipeline">Steam Group</a>
+		<span class="separator">•</span>
+		<a href="https://github.com/AntiDruid/pipeline.tf">Github</a>
+		<span class="separator">•</span>
+        <a href="mailto:plrpipeline2009@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+  
+<script>
+// Get all trigger links (those with data-modal)
+const modalTriggers = document.querySelectorAll('[data-modal]');
+
+// Get all close buttons (one per modal)
+const closeButtons = document.querySelectorAll('.modal .close');
+
+// Get all modals
+const modals = document.querySelectorAll('.modal');
+
+// Open modal function
+function openModal(modalId) {
+  const modal = document.getElementById(`modal-${modalId}`);
+  if (modal) {
+    modal.style.display = "block";
+  }
+}
+
+// Close modal function
+function closeModal() {
+  modals.forEach(modal => {
+    modal.style.display = "none";
+  });
+}
+
+// Add click listeners to all triggers
+modalTriggers.forEach(trigger => {
+  trigger.addEventListener('click', function(e) {
+    e.preventDefault();                // Prevent any default behavior
+    const modalId = this.getAttribute('data-modal');
+    openModal(modalId);
+  });
+});
+
+// Close when clicking X on any modal
+closeButtons.forEach(btn => {
+  btn.addEventListener('click', closeModal);
+});
+
+// Close when clicking outside any modal content
+window.addEventListener('click', function(event) {
+  if (event.target.classList.contains('modal')) {
+    closeModal();
+  }
+});
+
+// Optional: Close with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

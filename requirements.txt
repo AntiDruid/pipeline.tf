@@ -1,0 +1,6 @@
+# requirements.txt
+# For the Node.js backend server (Express + A2S querying)
+
+express@^4.19.2
+cors@^2.8.5
+source-server-query@^3.0.3
